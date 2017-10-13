@@ -1,17 +1,22 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
+
+router.post('/', function (req, res, next) {
+    var email = req.body.email;
+    var user = new User({
+        firstName: 'Max',
+        lastName: 'Markov',
+        password: 'super-secret',
+        email: email
+    });
+    user.save();
+    res.redirect('/');
+
+});
 
 router.get('/', function (req, res, next) {
-    res.render('index');
-});
-
-router.post('/message', function (req, res, next) {
-    const message = req.body.message
-    res.redirect('/message/' + message);
-});
-
-router.get('/message/:msg', function (req, res, next) {
-    res.render('node', { message: req.params.msg});
+    res.render('node');
 });
 
 module.exports = router;
