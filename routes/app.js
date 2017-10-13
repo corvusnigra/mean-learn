@@ -16,7 +16,13 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-    res.render('node');
+    User.findOne({}, function (err, doc) {
+        if(err){
+            res.send('Error');
+        }
+        res.render('node', {email: doc.email});
+    });
+
 });
 
 module.exports = router;
