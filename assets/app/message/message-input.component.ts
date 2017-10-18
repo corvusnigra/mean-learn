@@ -17,6 +17,10 @@ export class MessageInputComponent implements OnInit{
     onSubmit(form: NgForm){
         if(this.message) {
             this.message.content = form.value.content;
+            this.messageService.updateMessage(this.message)
+                .subscribe(
+                    data => console.log(data)
+                );
             this.message = null;
         } else {
             const message = new Message(form.value.content, 'Max');
