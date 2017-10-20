@@ -9,10 +9,10 @@ var schema = new Schema({
 
 
 schema.post('remove', function (message) {
-   User.findById(message.user, function(err, user){
-       user.messages.pull(message);
-       user.save();
-   });
+    User.findById(message.user, function (err, user) {
+        user.messages.pull(message);
+        user.save();
+    });
 });
 
 module.exports = mongoose.model('Message', schema);
