@@ -17,4 +17,20 @@ export class AuthService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
 
+    signup(user: User){
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const body = JSON.stringify(user);
+        return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json()));
+    }
+
+    logout(){
+        localStorage.clear();
+    }
+
+    isLoggedIn(){
+        return localStorage.getItem('token') !== null;
+    }
+
 }
